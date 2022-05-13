@@ -9,6 +9,7 @@ Write a beautiful code that passes the Betty checks
 ## 1. Simple shell 0.1
 
 Write a UNIX command line interpreter
+
 	Display a prompt and wait for the user to type a command. A command line always ends with a new line.
 	display the prompt again each time a command has been executed.
 	The command lines are simple, no semicolons, no pipes, no redirections or any other advanced features.
