@@ -19,6 +19,23 @@ Write a UNIX command line interpreter
 	Handle errors.
 	You have to handle the “end of file” condition (Ctrl+D)
 
+## 2. Simple shell 0.2
+
+Handle command lines with arguments
+
+## 3. Simple shell 0.3
+
+Handle the PATH
+fork must not be called if the command doesn’t exist
+
+## 4. Simple shell 0.4
+
+Implement the exit built-in, that exits the shell
+
+## 5. Simple shell 1.0
+
+Implement the env built-in, that prints the current environment
+
 ## Authors
 
 Abdul Maham (@iamMAHAM) - Joel Brou (...)
