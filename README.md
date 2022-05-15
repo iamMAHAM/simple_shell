@@ -2,6 +2,8 @@
 
 Write a simple UNIX command interpreter.
 
+![](https://s3.amazonaws.com/intranet-projects-files/holbertonschool-low_level_programming/235/shell.jpeg)
+
 ## 0. Betty would be proud
 
 Write a beautiful code that passes the Betty checks
@@ -38,4 +40,4 @@ Implement the env built-in, that prints the current environment
 
 ## Authors
 
-Abdul Maham (@iamMAHAM) - Joel Brou (...)
+Abdul Maham (@iamMAHAM) - Joel Brou (@jocelynjoel)
