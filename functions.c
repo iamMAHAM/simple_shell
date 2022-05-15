@@ -62,24 +62,51 @@ pid_t spawnChild(char **args_list)
 
 /**
  * handleBuiltin - a function that handle a built-in command
- * @program: the name of program
+ * @args: the list of args
  * Return: an integer
  */
-int handleBuiltin(char *program)
+int handleBuiltin(char **args)
 {
-	char *argv[] = {"exit", "cd", "env"};
+	char *argv[] = {"exit", "cd"};
 	int i = 0;
 	int length = 0;
+	char *program;
 
 	length = sizeof(argv) / sizeof(argv[0]);
+	program = args[0];
+	for (i; i < length; i++)
 	{
-		if (_strcmp(program, argv[i]) == 0)/*compare program and C array strings*/
+		if (program)
 		{
-			if (_strcmp(argv[i], "exit") == 0)
+			if (_strcmp(program, argv[i]) == 0)/*compare program and C array strings*/
 			{
-				exit(EXIT_SUCCESS);
+				if (_strcmp(argv[i], "exit") == 0)
+				{
+					free(args);
+					exit(EXIT_SUCCESS);
+				}
 			}
 		}
 	}
 	return (0);
+}
+
+/**
+  * change_dir - Afunction that changes working directory.
+  * @path: The new current working directory.
+  * Return: 0 on success, 98 on failure.
+  */
+int change_dir(const char *path)
+{
+	char *buf = NULL;
+	size_t size = 1024;
+
+	if (path == NULL)
+		path = getcwd(buf, size);
+	if (chdir(path) == -1)
+	{
+		perror(path);
+		return (98);
+	}
+	return (1);
 }
