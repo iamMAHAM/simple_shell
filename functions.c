@@ -92,17 +92,16 @@ int handleBuiltin(char **args)
 }
 
 /**
-  * change_dir - Afunction that changes working directory.
-  * @path: The new current working directory.
+  * change_dir - a function that changes working directory.
+  * @path: the working directory.
   * Return: 0 on success, 98 on failure.
   */
 int change_dir(const char *path)
 {
-	char *buf = NULL;
-	size_t size = 1024;
+	char *buffer = NULL;
 
 	if (path == NULL)
-		path = getcwd(buf, size);
+		path = getcwd(buffer, BUFFER_LEN);
 	if (chdir(path) == -1)
 	{
 		perror(path);
