@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+#include <unistd.h>
 #include "main.h"
 /**
  * fill_args - Fill an args_list with every input typed by the user
@@ -36,6 +37,7 @@ int fill_args(char *input, char **args_list)
 pid_t spawnChild(char **args_list)
 {
 	pid_t ch_pid;
+	int status;
 
 	ch_pid = fork();
 	if (ch_pid == -1)
@@ -43,17 +45,41 @@ pid_t spawnChild(char **args_list)
 		perror("fork");
 		exit(EXIT_FAILURE);
 	}
-	else if (ch_pid == 0)
+
+	if (ch_pid == 0)
 	{
-		if (execve(args_list[0], args_list, NULL) == (-1))
+		if (execvp(args_list[0], args_list) == (-1))
 		{
-			perror("execv");
-			exit(0);
+			perror(args_list[0]);
+			exit(EXIT_FAILURE);
 		}
 	}
 	else
 	{
-		printf("spawned child with pid - %d\n", ch_pid);
-		return (ch_pid);
+		wait(&status);
 	}
+}
+
+/**
+ * handleBuiltin - a function that handle a built-in command
+ * @program: the name of program
+ * Return: an integer
+ */
+int handleBuiltin(char *program)
+{
+	char *argv[] = {"exit", "cd", "env"};
+	int i = 0;
+	int length = 0;
+
+	length = sizeof(argv) / sizeof(argv[0]);
+	{
+		if (_strcmp(program, argv[i]) == 0)/*compare program and C array strings*/
+		{
+			if (_strcmp(argv[i], "exit") == 0)
+			{
+				exit(EXIT_SUCCESS);
+			}
+		}
+	}
+	return (0);
 }
