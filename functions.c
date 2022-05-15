@@ -35,11 +35,7 @@ int fill_args(char *input, char **args_list)
  */
 pid_t spawnChild(char **args_list)
 {
-	int i = 0;
 	pid_t ch_pid;
-
-	for (i = 0; i < 3; ++i)
-		printf("%s\n", args_list[i]);
 
 	ch_pid = fork();
 	if (ch_pid == -1)
