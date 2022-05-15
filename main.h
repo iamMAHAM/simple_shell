@@ -11,8 +11,13 @@
 #define BUFFSIZE 32
 #define BUFFER_LEN 1024
 
+/**tools.c**/
+int _strcmp(const char *s1, const char *s2);
+int handleBuiltin(char *program);
+
 /**functions.c**/
 pid_t spawnChild(char **args_list);
 int fill_args(char *input, char **args_list);
+int handleBuiltin(char *program);
 
 #endif

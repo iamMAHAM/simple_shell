@@ -25,13 +25,13 @@ int main(void)
 	{
 		printf("($) ");
 		status = getline(&buffer, &buffsize, stdin);
-
-		if (status == -1)
+		if (status == EOF)
 		{
 			perror("getline");
 			exit(EXIT_FAILURE);
 		}
 		fill_args(buffer, args);
+		handleBuiltin(args[0]);
 		spawnChild(args);
 	}
 	return (0);
