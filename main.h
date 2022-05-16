@@ -13,7 +13,6 @@
 
 /**tools.c**/
 int _strcmp(const char *s1, const char *s2);
-int handleBuiltin(char *program);
 
 /**functions.c**/
 pid_t spawnChild(char **args_list);
