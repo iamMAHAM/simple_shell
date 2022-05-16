@@ -13,10 +13,14 @@
 
 /**tools.c**/
 int _strcmp(const char *s1, const char *s2);
+int _putchar(char c);
+void _puts(char *str);
 
 /**functions.c**/
 pid_t spawnChild(char **args_list);
 int fill_args(char *input, char **args_list);
-int handleBuiltin(char *program);
+int handleBuiltin(char **args);
+int change_dir(const char *path);
+char *_strtok(char *str, const char *separator);
 
 #endif

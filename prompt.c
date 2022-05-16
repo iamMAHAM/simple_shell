@@ -20,10 +20,12 @@ int main(void)
 	if (!buffer)
 		exit(1);
 	args = malloc(sizeof(char *) * BUFFER_LEN);
+	if (!args)
+		exit(1);
 
 	while (1)
 	{
-		printf("($) ");
+		_puts("($) ");
 		status = getline(&buffer, &buffsize, stdin);
 		if (status == EOF)
 		{
@@ -31,8 +33,10 @@ int main(void)
 			exit(EXIT_FAILURE);
 		}
 		fill_args(buffer, args);
-		handleBuiltin(args[0]);
+		handleBuiltin(args);
 		spawnChild(args);
 	}
+	free(args);
+	free(buffer);
 	return (0);
 }
