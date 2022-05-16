@@ -20,5 +20,7 @@ void _puts(char *str);
 pid_t spawnChild(char **args_list);
 int fill_args(char *input, char **args_list);
 int handleBuiltin(char **args);
+int change_dir(const char *path);
+char *_strtok(char *str, const char *separator);
 
 #endif
