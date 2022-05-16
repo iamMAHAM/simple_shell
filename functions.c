@@ -16,12 +16,12 @@ int fill_args(char *input, char **args_list)
 	int i = 0;
 	char *options, *aux = input, *command;
 
-	command = strtok(input, "\n\t\r ");
+	command = _strtok(input, "\n\t\r ");
 	args_list[i] = command;
 	while (aux != NULL)
 	{
 		++i;
-		options = strtok(NULL, "\n\t\r ");
+		options = _strtok(NULL, "\n\t\r ");
 		aux = options;
 		args_list[i] = options;
 	}
