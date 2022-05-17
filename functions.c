@@ -83,7 +83,7 @@ int handleBuiltin(char **args)
 				if (_strcmp(argv[i], "exit") == 0)
 				{
 					free(args);
-					exit(EXIT_SUCCESS);
+					exit(_atoi(args[1]));
 				}
 			}
 		}
