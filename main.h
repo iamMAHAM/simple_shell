@@ -15,6 +15,7 @@
 int _strcmp(const char *s1, const char *s2);
 int _putchar(char c);
 void _puts(char *str);
+int _atoi(char *s);
 
 /**functions.c**/
 pid_t spawnChild(char **args_list);
