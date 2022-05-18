@@ -11,6 +11,9 @@
 #define BUFFSIZE 32
 #define BUFFER_LEN 1024
 
+/**environnement*/
+extern char **environ;
+
 /**tools.c**/
 int _strcmp(const char *s1, const char *s2);
 int _putchar(char c);
