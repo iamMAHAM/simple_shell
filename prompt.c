@@ -12,7 +12,6 @@
 int main(void)
 {
 	int status;
-	int charac;
 	size_t buffsize = 32;
 	char *buffer, **args;
 
