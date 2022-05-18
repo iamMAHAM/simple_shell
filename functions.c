@@ -42,7 +42,7 @@ void spawnChild(char **args_list)
 	ch_pid = fork();
 	if (ch_pid == -1)
 	{
-		perror("fork");
+		perror("Error:");
 		exit(EXIT_FAILURE);
 	}
 
@@ -50,7 +50,7 @@ void spawnChild(char **args_list)
 	{
 		if (execve(args_list[0], args_list, NULL) == (-1))
 		{
-			perror(args_list[0]);
+			perror("hsh");
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -83,7 +83,9 @@ int handleBuiltin(char **args)
 				if (_strcmp(argv[i], "exit") == 0)
 				{
 					free(args);
-					exit(_atoi(args[1]));
+					if (args[1])
+						exit(_atoi(args[1]));
+					exit(EXIT_SUCCESS);
 				}
 			}
 		}
