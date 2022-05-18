@@ -28,7 +28,6 @@ int main(void)
 		status = getline(&buffer, &buffsize, stdin);
 		if (status == EOF)
 		{
-			perror("getline");
 			exit(EXIT_FAILURE);
 		}
 		fill_args(buffer, args);
