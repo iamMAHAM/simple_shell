@@ -18,7 +18,7 @@ void _puts(char *str);
 int _atoi(char *s);
 
 /**functions.c**/
-pid_t spawnChild(char **args_list);
+void spawnChild(char **args_list);
 int fill_args(char *input, char **args_list);
 int handleBuiltin(char **args);
 int change_dir(const char *path);
