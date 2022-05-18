@@ -48,7 +48,7 @@ void spawnChild(char **args_list)
 
 	if (ch_pid == 0)
 	{
-		if (execvp(args_list[0], args_list) == (-1))
+		if (execve(args_list[0], args_list, NULL) == (-1))
 		{
 			perror(args_list[0]);
 			exit(EXIT_FAILURE);
