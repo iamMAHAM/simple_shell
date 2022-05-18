@@ -34,7 +34,7 @@ int fill_args(char *input, char **args_list)
  * @args_list: the arguments list
  * Return: a child of main process id
  */
-pid_t spawnChild(char **args_list)
+void spawnChild(char **args_list)
 {
 	pid_t ch_pid;
 	int status;
@@ -74,7 +74,7 @@ int handleBuiltin(char **args)
 
 	length = sizeof(argv) / sizeof(argv[0]);
 	program = args[0];
-	for (i; i < length; i++)
+	for (; i < length; i++)
 	{
 		if (program)
 		{
