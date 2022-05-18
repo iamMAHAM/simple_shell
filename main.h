@@ -21,6 +21,9 @@ void _puts(char *str);
 int _atoi(char *s);
 char *_strdup(char *str);
 
+/**tools1.c**/
+void free_all(char **args);
+
 /**functions.c**/
 void spawnChild(char **args_list);
 int fill_args(char *input, char **args_list);
