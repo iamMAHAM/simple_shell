@@ -50,7 +50,7 @@ void spawnChild(char **args_list)
 	{
 		if (execve(args_list[0], args_list, NULL) == (-1))
 		{
-			perror("hsh");
+			perror("./hsh");
 			exit(EXIT_FAILURE);
 		}
 	}
