@@ -24,7 +24,7 @@ int main(void)
 
 	while (1)
 	{
-		_puts("($) ");
+		_puts("cisfun$ ");
 		status = getline(&buffer, &buffsize, stdin);
 		if (status == EOF)
 		{
