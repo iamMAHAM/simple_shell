@@ -17,7 +17,7 @@ int main(void)
 	int count = 1, path_status = 0, ex_status = 0, o_status = 0,
 	bt_status = 0;
 
-	_puts("($) ");
+	prompt("($) ", 5);
 	status = getline(&buffer, &buffsize, stdin);
 	while (status != -1)
 	{
@@ -48,7 +48,7 @@ int main(void)
 		else if (*buffer == '\n')
 			free(buffer);
 		buffer = NULL, count++;
-		_puts("($) "), status = getline(&buffer, &buffsize, stdin);
+		_printp("($) ", 5), status = getline(&buffer, &buffsize, stdin);
 	}
 	last_free(buffer);
 	return (o_status);
