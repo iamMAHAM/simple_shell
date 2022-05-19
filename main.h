@@ -6,6 +6,9 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 /**macros**/
 #define BUFFSIZE 32
@@ -22,10 +25,11 @@ int _atoi(char *s);
 char *_strdup(char *str);
 
 /**tools1.c**/
-void free_all(char **args);
+int _strlen(char *str);
+void free_grid(char **grid, int heigth);
 
 /**functions.c**/
-void spawnChild(char **args_list);
+int spawnChild(char **args_list);
 int fill_args(char *input, char **args_list);
 int handleBuiltin(char **args);
 int change_dir(const char *path);
