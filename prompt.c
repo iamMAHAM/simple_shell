@@ -11,33 +11,45 @@
  */
 int main(void)
 {
-	int status;
-	size_t buffsize = 32;
-	int continued = 1;
-	char *buffer, **args;
+	ssize_t status = 0;
+	size_t buffsize = 0;
+	char *buffer = NULL, *args[20];
+	int counter = 1, path_status = 0, exist_status = 0, exit_status = 0,
+	builtin_status = 0;
 
-	buffer = (char *)malloc(sizeof(char *) * BUFFSIZE);
-	if (!buffer)
-		exit(1);
-	args = malloc(sizeof(char *) * BUFFER_LEN);
-	if (!args)
-		exit(1);
-
-	while (continued)
+	_puts("($) ");
+	status = getline(&buffer, &buffsize, stdin);
+	while (status != -1)
 	{
-		_puts("($) ");
-		status = getline(&buffer, &buffsize, stdin);
-		if (status == EOF) /*ctrl D or EOF*/
-		{
-			continued = 0;
-		}
-		else
+		if (*buffer != '\n')
 		{
 			fill_args(buffer, args);
-			spawnChild(args);
+			if (args[0] != NULL)
+			{
+				exist_status = is_exist_file(args[0]);
+				if (exist_status != 0)
+				{
+					path_status = handle_path(args);
+					if (path_status == 0)
+						exit_status = spawnChild(args), free(buffer), free(*args);
+					else
+					{
+					builtin_status = handleBuiltin(args, exit_status);
+					if (builtin_status != 0)
+						exit_status = cmd_not_found(args, counter), free(buffer);
+					}
+				}
+				else
+					exit_status = spawnChild(args), free(buffer);
+			}
+			else
+				free(buffer);
 		}
+		else if (*buffer == '\n')
+			free(buffer);
+		buffer = NULL, counter++;
+		_puts("($) "), status = getline(&buffer, &buffsize, stdin);
 	}
-	free(args);
-	free(buffer);
-	return (0);
+	last_free(buffer);
+	return (exit_status);
 }
