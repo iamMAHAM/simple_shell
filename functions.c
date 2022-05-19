@@ -37,21 +37,20 @@ int fill_args(char *input, char **args_list)
 int spawnChild(char **args_list)
 {
 	pid_t ch_pid;
-	int status;
+	int status, exit_status;
 
 	ch_pid = fork();
 	if (ch_pid == -1)
 	{
-		perror("Error:");
-		exit(EXIT_FAILURE);
+		_puts("Error\n");
 	}
-
 	else if (ch_pid == 0)
 	{
 		if (execve(args_list[0], args_list, NULL) == (-1))
 		{
+			exit_status = -1;
 			perror("hsh");
-			exit(EXIT_FAILURE);
+			exit(exit_status);
 		}
 		exit(0);
 	}
@@ -59,7 +58,8 @@ int spawnChild(char **args_list)
 	{
 		wait(&status);
 	}
-	return (status);
+	exit_status = WEXITSTATUS(status);
+	return (exit_status);
 }
 
 /**
@@ -67,30 +67,33 @@ int spawnChild(char **args_list)
  * @args: the list of args
  * Return: an integer
  */
-int handleBuiltin(char **args)
+int handleBuiltin(char **args, int status)
 {
-	char *argv[] = {"exit", "cd"};
-	int i = 0;
-	int length = 0;
+	char *argv[3] = {"exit", "cd", "env"};
+	int i = 0, length = 0;
 	char *program;
 
 	length = sizeof(argv) / sizeof(argv[0]);
 	program = args[0];
-	for (; i < length; i++)
+	while (i < length)
 	{
-		if (program)
-		{
-			if (_strcmp(program, argv[i]) == 0)/*compare program and C array strings*/
-			{
-				if (_strcmp(argv[i], "exit") == 0)
-				{
-					free(args);
-					if (args[1])
-						exit(_atoi(args[1]));
-					exit(EXIT_SUCCESS);
-				}
-			}
-		}
+		if (_strcmp(program, argv[i]) == 0)
+			break;
+		i++;
+	}
+	if (i == length)
+		return (-1);
+
+	if (_strcmp(argv[i], "exit") == 0)
+	{
+		free(program);
+		exit(status);
+	}
+	if (_strcmp(argv[i], "env") == 0)
+	{
+		if (environ == NULL)
+			return (0);
+		_puts(*environ);
 	}
 	return (0);
 }
