@@ -12,7 +12,7 @@
 
 /**macros**/
 #define BUFFSIZE 32
-#define BUFFER_LEN 1024
+#define BUFFER_LEN 20
 
 /**environnement*/
 extern char **environ;
@@ -27,12 +27,20 @@ char *_strdup(char *str);
 /**tools1.c**/
 int _strlen(char *str);
 void free_grid(char **grid, int heigth);
+int is_exist_file(char *path);
+void last_free(char *buffer);
 
 /**functions.c**/
 int spawnChild(char **args_list);
 int fill_args(char *input, char **args_list);
-int handleBuiltin(char **args);
+int handleBuiltin(char **args, int status);
 int change_dir(const char *path);
 char *_strtok(char *str, const char *separator);
+
+/**functions1.c**/
+int cmd_not_found(char **args, int counter);
+int handle_path(char **args);
+char *_getenv(char *env_var);
+char *concat_cmd(char *dir_path, char *cmd);
 
 #endif
