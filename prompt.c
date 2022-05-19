@@ -14,7 +14,8 @@ int main(void)
 	ssize_t status = 0;
 	size_t buffsize = 0;
 	char *buffer = NULL, *args[20];
-	int count = 1, path_status = 0, status = 0, ex_status = 0, bt_status = 0;
+	int count = 1, path_status = 0, ex_status = 0, o_status = 0,
+	bt_status = 0;
 
 	_puts("($) ");
 	status = getline(&buffer, &buffsize, stdin);
@@ -25,21 +26,21 @@ int main(void)
 			fill_args(buffer, args);
 			if (args[0] != NULL)
 			{
-				status = is_exist_file(args[0]);
-				if (status != 0)
+				ex_status = is_exist_file(args[0]);
+				if (ex_status != 0)
 				{
 					path_status = handle_path(args);
 					if (path_status == 0)
-						ex_status = spawnChild(args), free(buffer), free(*args);
+						o_status = spawnChild(args), free(buffer), free(*args);
 					else
 					{
-					bt_status = handleBuiltin(args, ex_status);
+					bt_status = handleBuiltin(args, o_status);
 					if (bt_status != 0)
-						ex_status = cmd_not_found(args, count), free(buffer);
+						o_status = cmd_not_found(args, count), free(buffer);
 					}
 				}
 				else
-					ex_status = spawnChild(args), free(buffer);
+					o_status = spawnChild(args), free(buffer);
 			}
 			else
 				free(buffer);
@@ -50,5 +51,5 @@ int main(void)
 		_puts("($) "), status = getline(&buffer, &buffsize, stdin);
 	}
 	last_free(buffer);
-	return (ex_status);
+	return (o_status);
 }
