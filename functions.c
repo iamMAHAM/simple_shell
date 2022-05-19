@@ -65,6 +65,7 @@ int spawnChild(char **args_list)
 /**
  * handleBuiltin - a function that handle a built-in command
  * @args: the list of args
+ * @status: the exit stats
  * Return: an integer
  */
 int handleBuiltin(char **args, int status)
