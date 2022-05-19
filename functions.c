@@ -34,7 +34,7 @@ int fill_args(char *input, char **args_list)
  * @args_list: the arguments list
  * Return: a child of main process id
  */
-void spawnChild(char **args_list)
+int spawnChild(char **args_list)
 {
 	pid_t ch_pid;
 	int status;
@@ -46,18 +46,20 @@ void spawnChild(char **args_list)
 		exit(EXIT_FAILURE);
 	}
 
-	if (ch_pid == 0)
+	else if (ch_pid == 0)
 	{
 		if (execve(args_list[0], args_list, NULL) == (-1))
 		{
-			perror("./hsh");
+			perror("hsh");
 			exit(EXIT_FAILURE);
 		}
+		exit(0);
 	}
 	else
 	{
 		wait(&status);
 	}
+	return (status);
 }
 
 /**
