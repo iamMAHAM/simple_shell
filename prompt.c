@@ -13,6 +13,7 @@ int main(void)
 {
 	int status;
 	size_t buffsize = 32;
+	int continued = 1;
 	char *buffer, **args;
 
 	buffer = (char *)malloc(sizeof(char *) * BUFFSIZE);
@@ -22,17 +23,19 @@ int main(void)
 	if (!args)
 		exit(1);
 
-	while (1)
+	while (continued)
 	{
-		printf("cisfun$ ");
+		_puts("($) ");
 		status = getline(&buffer, &buffsize, stdin);
-		if (status == EOF)
+		if (status == EOF) /*ctrl D or EOF*/
 		{
-			exit(EXIT_FAILURE);
+			continued = 0;
 		}
-		fill_args(buffer, args);
-		handleBuiltin(args);
-		spawnChild(args);
+		else
+		{
+			fill_args(buffer, args);
+			spawnChild(args);
+		}
 	}
 	free(args);
 	free(buffer);
