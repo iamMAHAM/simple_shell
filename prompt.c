@@ -48,7 +48,7 @@ int main(void)
 		else if (*buffer == '\n')
 			free(buffer);
 		buffer = NULL, count++;
-		_printp("($) ", 5), status = getline(&buffer, &buffsize, stdin);
+		prompt("($) ", 5), status = getline(&buffer, &buffsize, stdin);
 	}
 	last_free(buffer);
 	return (o_status);
