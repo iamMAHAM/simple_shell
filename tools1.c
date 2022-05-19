@@ -46,7 +46,7 @@ void free_grid(char **grid, int heigth)
 }
 
 /**
- * is_exit_file - verify if a file exist
+ * is_exist_file - verify if a file exist
  * @path: path to the file
  * Return: 0 if the file exist or -1 if not
  */
@@ -65,7 +65,7 @@ int is_exist_file(char *path)
 
 /**
  * last_free - Free the memory for the last execution
- * @buffer: Input typed by the user
+ * @buffer: the buffer
  */
 void last_free(char *buffer)
 {
@@ -77,4 +77,3 @@ void last_free(char *buffer)
 	if (!isatty(STDIN_FILENO))
 		free(buffer);
 }
-
