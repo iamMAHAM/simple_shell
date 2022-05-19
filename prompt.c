@@ -14,8 +14,7 @@ int main(void)
 	ssize_t status = 0;
 	size_t buffsize = 0;
 	char *buffer = NULL, *args[20];
-	int count = 1, path_status = 0, ex_status = 0, o_status = 0,
-	bt_status = 0;
+	int count = 1, path_status = 0, ex_status = 0, o_status = 0, bt_status = 0;
 
 	prompt("($) ", 5);
 	status = getline(&buffer, &buffsize, stdin);
