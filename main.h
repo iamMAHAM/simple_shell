@@ -25,6 +25,7 @@ int _atoi(char *s);
 char *_strdup(char *str);
 
 /**tools1.c**/
+int prompt(const char *prompt, unsigned int size);
 int _strlen(char *str);
 void free_grid(char **grid, int heigth);
 int is_exist_file(char *path);
