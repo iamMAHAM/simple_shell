@@ -72,11 +72,10 @@ int handleBuiltin(char **args, int status)
 {
 	char *argv[3] = {"exit", "cd", "env"};
 	int i = 0, length = 0, length1 = 0;
-	char *program;
+	char *program = args[0];
 
 	length = sizeof(argv) / sizeof(argv[0]);
-	length1 = sizeof(args) / sizeof(*args[0]);
-	program = args[0];
+	while (args[++length1] != NULL)
 	while (i < length)
 	{
 		if (_strcmp(program, argv[i]) == 0)
@@ -85,13 +84,11 @@ int handleBuiltin(char **args, int status)
 	}
 	if (i == length)
 		return (-1);
-
 	if (_strcmp(argv[i], "exit") == 0)
 	{
 		if (length1 == 2)
 		{
-			status = atoi(args[1]);
-			free(program);
+			status = atoi(args[1]), free(program);
 		}
 		free(program);
 		exit(status);
@@ -101,6 +98,16 @@ int handleBuiltin(char **args, int status)
 		if (environ == NULL)
 			return (0);
 		_puts(*environ);
+	}
+	if (_strcmp(argv[i], "cd") == 0)
+	{
+		printf("length : %d", length1);
+		if (length1 == 2)
+			change_dir(args[1]), free(program);
+		else if (length1 > 2)
+			perror("cd"), free(program);
+		else
+			change_dir(_getenv("HOME")), free(program);
 	}
 	return (0);
 }
@@ -121,7 +128,7 @@ int change_dir(const char *path)
 		perror(path);
 		return (98);
 	}
-	return (1);
+	return (0);
 }
 
 /**
