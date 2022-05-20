@@ -94,7 +94,7 @@ int handleBuiltin(char **args, int status)
 	{
 		if (environ == NULL)
 			return (0);
-		write(1, environ, 1000);
+		_puts(*environ);
 	}
 	return (0);
 }
