@@ -92,7 +92,6 @@ int handleBuiltin(char **args, int status)
 		{
 			status = atoi(args[1]);
 			free(program);
-			printf("status %d\n",status);
 		}
 		free(program);
 		exit(status);
