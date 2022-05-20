@@ -71,10 +71,11 @@ int spawnChild(char **args_list)
 int handleBuiltin(char **args, int status)
 {
 	char *argv[3] = {"exit", "cd", "env"};
-	int i = 0, length = 0;
+	int i = 0, length = 0, length1 = 0;
 	char *program;
 
 	length = sizeof(argv) / sizeof(argv[0]);
+	length1 = sizeof(args) / sizeof(*args[0]);
 	program = args[0];
 	while (i < length)
 	{
@@ -87,6 +88,12 @@ int handleBuiltin(char **args, int status)
 
 	if (_strcmp(argv[i], "exit") == 0)
 	{
+		if (length1 == 2)
+		{
+			status = atoi(args[1]);
+			free(program);
+			printf("status %d\n",status);
+		}
 		free(program);
 		exit(status);
 	}
